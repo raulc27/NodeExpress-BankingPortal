@@ -76,6 +76,7 @@ app.use('/',router.get('/transfer', function(req,res,next){
     })
 }))
 
+app.get('/transfer',(req,res)=>res.render('transfer'));
 
 app.post('/transfer',(req,res)=>{
     accounts[req.body.from].balance = accounts[req.body.from].balance-req.body.amount;
@@ -86,6 +87,9 @@ app.post('/transfer',(req,res)=>{
     fs.writeFileSync(path.join(__dirname, 'json/accounts.json'), accountsJSON, 'utf8');
     res.render('transfer',{message:'Transfer Completed'})
 });
+
+app.get('/payment',(req,res)=>res.render('payment',{account:accounts.credit}));
+
 
 app.post('/payment',(req,res)=>{
     accounts.credit.balance -= req.body.amount;
