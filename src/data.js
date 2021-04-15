@@ -27,4 +27,4 @@ writeJSON = () => {
 }
 
 
-module.exports = { accounts, accountData, writeJSON}
+module.exports = {accounts, users, accountData, writeJSON}
