@@ -42,9 +42,31 @@ app.use('/',router.get('/', function(req,res,next){
 app.use('/',router.get('/savings', function(req,res,next){
     res.render('account',{
         
-        account:accounts.saving
+        account:accounts.savings
     })
 }))
+
+app.use('/',router.get('/credit', function(req,res,next){
+    res.render('account',{
+        
+        account:accounts.credit
+    })
+}))
+
+app.use('/',router.get('/checking', function(req,res,next){
+    res.render('account',{
+        
+        account:accounts.checking
+    })
+}))
+
+app.use('/',router.get('/profile', function(req,res,next){
+    res.render('profile',{
+        
+        user:users[0]
+    })
+}))
+
 
 // setting up port and server...
 
