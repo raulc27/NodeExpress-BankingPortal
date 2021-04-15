@@ -66,9 +66,9 @@ function onError(err){
 let port = process.env.PORT || 3000;
 
 //listening...
-app.listen(port,()=>{});
+app.listen(port,()=>{console.log('PS Project Running on port 3000!')});
 
 //server.on('err',onError);
 
-console.log('PS Project Running on port 3000!');
+
 
