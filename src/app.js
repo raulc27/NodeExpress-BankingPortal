@@ -35,6 +35,31 @@ function normalizePort(val){
     return false;
 }
 
+// creating function for error...
+function onError(err){
+    if(err.syscall !== 'listen'){
+        throw err;
+    }
+
+    var bind = typeof port === 'string' ? 'Pipe' + port : 'Port' + port;
+
+    // cool msg errors... (raul)
+    switch(err.code){
+        case 'EACCESS':
+            console.error(bind + 'requires privileges you dont have')
+            process.exit(1);
+            break;
+
+        case 'EADDRINUSE':
+            console.error(bind  + 'port busy, out!');
+            process.exit(1)
+            break;
+        
+        default:
+            throw err;
+    }
+}
+
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -44,7 +69,7 @@ var server = http.createServer(app);
 
 //listening...
 server.listen(port);
-
+server.on('err',onError);
 
 console.log('PS Project Running on port 3000!');
 
