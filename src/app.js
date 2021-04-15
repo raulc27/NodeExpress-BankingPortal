@@ -61,15 +61,14 @@ function onError(err){
 }
 
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+//var port = normalizePort(process.env.PORT || '3000');
 
-// creating http server... 
-var server = http.createServer(app);
+let port = process.env.PORT || 3000;
 
 //listening...
-server.listen(port);
-server.on('err',onError);
+app.listen(port,()=>{});
+
+//server.on('err',onError);
 
 console.log('PS Project Running on port 3000!');
 
