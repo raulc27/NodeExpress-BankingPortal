@@ -4,9 +4,7 @@ const router = express.Router();
 const {writeJSON, accounts} = require('../data');
 
 
-router.get('/transfer', function(req,res,next){
-    res.render('transfer')
-})
+
 
 router.get('/transfer',(req,res)=>res.render('transfer'));
 
