@@ -16,8 +16,9 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // reading accounts.json, creating accountData and accounts... (raul)
 const accountData = fs.readFileSync(__dirname+'/json/accounts.json',{
-    enconding:'utf8',
+    encoding:'utf8',
     flag:'r'
+ 
 });
 
 const accounts = JSON.parse(accountData);
