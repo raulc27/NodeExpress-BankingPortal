@@ -13,6 +13,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname,'public')));
 
+app.use(express.urlencoded({extended:true}))
 
 // reading accounts.json, creating accountData and accounts... (raul)
 const accountData = fs.readFileSync(__dirname+'/json/accounts.json',{
@@ -68,6 +69,34 @@ app.use('/',router.get('/profile', function(req,res,next){
     })
 }))
 
+app.use('/',router.get('/transfer', function(req,res,next){
+    res.render('transfer',{
+        
+        
+    })
+}))
+
+
+app.post('/transfer',(req,res)=>{
+    accounts[req.body.from].balance = accounts[req.body.from].balance-req.body.amount;
+    accounts[req.body.to].balance = parseInt(accounts[req.body.to].balance)+parseInt(req.body.amount,10);
+
+    const accountsJSON = JSON.stringify(accounts,null,4);
+
+    fs.writeFileSync(path.join(__dirname, 'json/accounts.json'), accountsJSON, 'utf8');
+    res.render('transfer',{message:'Transfer Completed'})
+});
+
+app.post('/payment',(req,res)=>{
+    accounts.credit.balance -= req.body.amount;
+    accounts.credit.available += parseInt(req.body.amount,10);
+    const accountsJSON = JSON.stringify(accounts, null, 4);
+
+    fs.writeFileSync(path.join(__dirname,'json','accounts.json'), accountsJSON, 'utf8');
+
+    res.render('payment',{message:'Payment Sucessfull', account:accounts.credit});
+
+})
 
 // setting up port and server...
 
