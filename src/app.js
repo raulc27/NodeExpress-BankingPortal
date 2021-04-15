@@ -14,10 +14,36 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname,'public')));
 
 
+// reading accounts.json, creating accountData and accounts... (raul)
+const accountData = fs.readFileSync(__dirname+'/json/accounts.json',{
+    enconding:'utf8',
+    flag:'r'
+});
+
+const accounts = JSON.parse(accountData);
+
+//reading users.json, creating userData and users (raul)
+const userData = fs.readFileSync(__dirname+'/json/users.json',{
+    encoding:'utf8',
+    flag:'r'
+});
+
+const users = JSON.parse(userData);
 
 
 app.use('/',router.get('/', function(req,res,next){
-    res.render('index',{title:'Olá'})
+    res.render('index',{
+        title:'Account Summary',
+        accounts:accounts
+    })
+}))
+
+
+app.use('/',router.get('/savings', function(req,res,next){
+    res.render('account',{
+        
+        account:accounts.saving
+    })
 }))
 
 // setting up port and server...
