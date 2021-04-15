@@ -5,10 +5,7 @@ const {writeJSON, accounts} = require('../data');
 
 
 router.get('/transfer', function(req,res,next){
-    res.render('transfer',{
-        
-        
-    })
+    res.render('transfer')
 })
 
 router.get('/transfer',(req,res)=>res.render('transfer'));
@@ -35,4 +32,4 @@ router.post('/payment',(req,res)=>{
 
 })
 
-module.exports = {router};
+module.exports = router;
